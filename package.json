@@ -1,0 +1,37 @@
+{
+  "name": "revenuquebec",
+  "version": "0.1.0",
+  "description": "Web scraper to pull basic business accounting info from the Revenue Quebec website",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FuckTheBanks/RevenuQuebec.git"
+  },
+  "keywords": [
+    "Revenue",
+    "Quebec",
+    "QST",
+    "puppeteer"
+  ],
+  "author": "FuckTheBanks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FuckTheBanks/RevenuQuebec/issues"
+  },
+  "homepage": "https://github.com/FuckTheBanks/RevenuQuebec#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "puppeteer": "^5.5.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.19",
+    "@types/puppeteer": "^5.4.2",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.3"
+  }
+}
