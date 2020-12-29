@@ -6,9 +6,11 @@ export type LanguageType = "EN" | "FR";
 export async function selectLanguage(page: Page, language: LanguageType) {
   try {
     await clickLink(page, language);
+    console.log(`Switched language to: ${language}`);
     await closePopup(page);
   }
-  catch (_e) {
+  catch (e) {
     // do nothing
+    console.log(`Couldnt switch lang: ${e.message}`);
   }
 } 

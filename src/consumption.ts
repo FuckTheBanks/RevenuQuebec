@@ -11,12 +11,13 @@ type Entry = {
   }[];
 }
 
-export async function fetchSOA(page: Page, file: string) {
+export async function fetchSOA(page: Page, file: string) : Promise<Entry[]> {
 
   const results = [];
 
   // click the link
   if (await navigateToPage(page, file)) {
+    // fetch page entries, then click "Next Page" button
     do {
       const pageResults = await iterateEntries(page);
       results.push(...pageResults);
@@ -30,7 +31,9 @@ export async function fetchSOA(page: Page, file: string) {
 export async function navigateToPage(page: Page, file: string) {
     // Navigate to page
     await page.click("#button-nav-mobile-main");
+    await sleep(100);
     await page.click("#nav-mobile-main > ul > li:nth-child(2) > button");
+    await sleep(100);
     await page.click("#nav-mobile-main > ul > li.nav-mobile-lien.selected > div > div:nth-child(2) > ul > li:nth-child(5) > a");
   
     await page.waitForSelector("#tableauxLoiModel");
@@ -43,11 +46,10 @@ async function iterateEntries(page: Page): Promise<Entry[]> {
   const r = [] as Entry[];
   for (let i = 0; i < entries.length; i++) {
     await page.click(`#rechercheParPeriodeTableau table > tbody > :nth-child(${i + 1}) > :first-child > a`);
-    console.log("waiting to update");
-    await sleep(500);
+    await page.waitForResponse(() => true);
+    //await sleep(500);
     await page.click("#consulter-declaration-selectionnee");
-    await sleep(500);
-    console.log("clicked the button");
+    await page.waitForResponse(() => true);
     await page.waitForSelector("#detail-releve-compte");
     const period = await scrapeEntry(page);
     r.push(period);
@@ -83,6 +85,10 @@ export async function clickNextPage(page: Page) {
   if (el) {
     await el.click();
     await page.waitForResponse(() => true);
+    // the response alone is insufficient to wait for the DOM update
+    // we add a manual wait here to allow the update to complete.
+    // there is probably a deterministic way to do this, but it works for me now
+    await sleep(250);
     return true;
   }
   return false;

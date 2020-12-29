@@ -15,6 +15,10 @@ test('can fetch consumptions taxes completes', async () => {
   // try and fetch consumption
   const r = await rq.fetchSOA("RT0001");
 
+  // ensure no duplicates (happened when update was too quick)
+  const entryCounts = r.reduce((dict, e) => dict.set(e.periodEnding, (dict.get(e.periodEnding) ?? 0) + 1), {} as Map<string, number>);
+  expect(Math.max(...Object.values(entryCounts))).toBe(1);
+
   console.log("Test Complete");
 })
 

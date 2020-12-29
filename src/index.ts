@@ -35,7 +35,7 @@ export class RQScraper {
     const page = await rq.login();
 
     if (lang)
-      selectLanguage(page, lang);
+      await selectLanguage(page, lang);
 
     await page.close();
     return rq;
