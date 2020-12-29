@@ -1,13 +1,12 @@
 
 import puppeteer from 'puppeteer';
-import { fetchSOA } from './consumption';
+import { fetchGstSOA } from './consumption/gst';
+import { fetchQstSOA } from './consumption/qst';
 import { LanguageType, selectLanguage } from './language';
 import { login } from './login';
-import { clickLink } from './utils';
 
 
 export class RQScraper {
-
 
   browser: puppeteer.Browser;
 
@@ -44,8 +43,9 @@ export class RQScraper {
   ///////////////////////////////////////////////////////////////////////
   // Data scraping
   
-  fetchSOA = async (file: string) => await fetchSOA(await this.newPage(), file);
-
+  fetchGstSOA = async (file: string) => await fetchGstSOA(await this.newPage(), file);
+  fetchQstSOA = async (file: string) => await fetchQstSOA(await this.newPage(), file);
+  
   ///////////////////////////////////////////////////////////////////////
   // Helper functions
   public login = () => login(this.browser, this.username, this.password);

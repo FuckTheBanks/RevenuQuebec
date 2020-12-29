@@ -6,19 +6,23 @@ export async function readText(page: Page, selector: string|ElementHandle) {
   return s.trim();
 }
 
-export async function clickXPath(page: Page, selector: string, index?: number) {
-  const elements = await page.$x(selector);
+export async function clickXPath(page: Page, xpath: string, index?: number) {
+  console.log('waiting for xpath');
+  await page.waitForXPath(xpath)
+  const elements = await page.$x(xpath);
+  console.log(`got ${elements.length} elements`);
   if ((
     elements.length == 1 && index === undefined) || 
     (index != undefined && elements.length > index)
   ){
-    await elements[0].click();
+    // clicking the elink
+    await elements[index ?? 0].click();
+    console.log('clicked!');
     return true;
   }
   return false;
 }
 export async function clickLink(page: Page, text: string, index?: number) {
-
   const r = await clickXPath(page, `//a[contains(., '${text}')]`, index);
   if (r) {
     await page.waitForNavigation({waitUntil: "networkidle2"});
@@ -30,4 +34,4 @@ export function sleep(ms: number) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
-}   
+}
