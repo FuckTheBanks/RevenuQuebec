@@ -573,7 +573,6 @@
       ],
       "declaration": true,
       "sourceMap": true,
-      "outDir": "./",
       "rootDir": "../src",
       "tsBuildInfoFile": "./.buildinfo",
       "downlevelIteration": true,
@@ -586,6 +585,7 @@
       "esModuleInterop": true,
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
+      "outDir": "./",
       "project": "../tsconfig.build.json",
       "configFilePath": "../tsconfig.build.json"
     },
