@@ -8,8 +8,11 @@ beforeEach(() => {
 test('can fetch QST taxes', async () => fetchAndTestAccount("TQ0001"))
 
 async function fetchAndTestAccount(file: string) {
+  // eslint-disable-next-line prefer-const
+  let headless = undefined;
+  //headless = false;
   const rq = await RQScraper.init("EN", undefined, undefined, {
-    headless: false
+    headless
   })
 
   const r = await rq.fetchQstSOA(file);

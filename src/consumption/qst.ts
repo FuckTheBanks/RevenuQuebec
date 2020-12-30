@@ -83,14 +83,21 @@ async function scrapeData(page: Page) : Promise<Entry[]> {
     )
   )
 
+  // Remove/standardize whatever character is being used on the website to delineate dates
+  const cleanDate = (str?: string) => str?.replace(/\D/g, '-') ?? "ERROR: Missing Date";
+
   const periodDates = titles
     .map(title => title?.match(/\d+\D\d+\D\d+/g) ?? [])
     .map(dateArray => ({
-      start: dateArray[0] ?? "ERROR: Missing StartDate",
-      end: dateArray[1] ?? "ERROR: Missing EndDate",
+      start: cleanDate(dateArray[0]),
+      end: cleanDate(dateArray[1]),
     }))
   return periodDates.map((period, index) => ({
     period,
-    items: tables[index]
+    items: tables[index].map(item => ({
+      amount: item.Amount,
+      description: item.Description,
+      date: cleanDate(item.Date)
+    }))
   }))
 }

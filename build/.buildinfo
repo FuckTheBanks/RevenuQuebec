@@ -502,7 +502,7 @@
         "affectsGlobalScope": false
       },
       "../src/consumption/qst.ts": {
-        "version": "9687db7f35e5a7bc1f371663ab7caf461c9bbc8dbc170fcd3bfe9d2d482098fc",
+        "version": "6cb28919e24c5d7f4f416610872a684c3d7e213cbef5193f5617e0e85b4cb4f8",
         "signature": "b1514c21dbcb93d91984b9e8d2140330fdbc61acbedc23c0feccf29957b9cf74",
         "affectsGlobalScope": false
       },
