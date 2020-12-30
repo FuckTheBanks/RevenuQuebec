@@ -1,7 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import puppeteer from 'puppeteer';
 import { login } from './login';
-
-
 
 test('login completes', async () => {
 

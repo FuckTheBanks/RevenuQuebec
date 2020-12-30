@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 type DeferredPromise<T> = Promise<T> & {
   resolve: (v: T) => void;
   reject: () => void;
 }
 
 export function defer<T = void>() {
-  let res:  (value: T | PromiseLike<T>) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let rej: (reason?: any) => void;
+  let res:  (value: T | PromiseLike<T>) => void;
 
-	let promise = new Promise<T>((resolve, reject) => {
+	const promise = new Promise<T>((resolve, reject) => {
 		res = resolve;
 		rej = reject;
 	}) as DeferredPromise<T>;

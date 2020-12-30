@@ -20,5 +20,7 @@ export async function closePopup(page: Page) {
   try {
     await page.click("#kx-modal-pedagogique-fermer");
   }
-  catch { }
+  catch { 
+    // no problem
+  }
 }

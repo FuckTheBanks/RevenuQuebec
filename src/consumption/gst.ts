@@ -15,6 +15,7 @@ export async function fetchGstSOA(this: RQScraper, file: string) : Promise<Entry
   }
   while (await clickNextPage(page));
 
+  await page.close();
   return results;
 }
 

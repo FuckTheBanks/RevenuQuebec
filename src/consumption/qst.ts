@@ -14,8 +14,8 @@ export async function fetchQstSOA(this: RQScraper, file: string) : Promise<Entry
   for (const year of years) {
     const data = await scrapeYear(page, year);
     results.push(...data);
-    console.log(data);
   }
+  await page.close();
   return results;
 }
 

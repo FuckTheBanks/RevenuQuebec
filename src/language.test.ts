@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import puppeteer from 'puppeteer';
 import { login } from './login';
-import { clickLink } from './utils';
 import {selectLanguage} from './language';
 
 test('switch language completes', async () => {
