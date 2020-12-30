@@ -43,15 +43,15 @@ export class RQScraper {
   ///////////////////////////////////////////////////////////////////////
   // Data scraping
   
-  fetchGstSOA = async (file: string) => await fetchGstSOA(await this.newPage(), file);
-  fetchQstSOA = async (file: string) => await fetchQstSOA(await this.newPage(), file);
+  public fetchGstSOA = fetchGstSOA;
+  public fetchQstSOA = fetchQstSOA;
   
   ///////////////////////////////////////////////////////////////////////
   // Helper functions
   public login = () => login(this.browser, this.username, this.password);
-  public newPage = async () => {
+  public newPage = async (url?: string) => {
     const page = await this.browser.newPage();
-    await page.goto("https://entreprises.revenuquebec.ca/EntPres/SX/SX00/sx00.Portail.PIU/SX00A01/");
+    await page.goto(url ?? "https://entreprises.revenuquebec.ca/EntPres/SX/SX00/sx00.Portail.PIU/SX00A01/");
     return page;
   }
 }

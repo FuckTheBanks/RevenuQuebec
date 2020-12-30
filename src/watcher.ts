@@ -2,10 +2,12 @@ import { Page } from "puppeteer";
 import { defer } from './defer';
 import { debounce } from 'lodash';
 
-type WatchCallback = (nodes: any[]) => void;
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+type WatchCallback = (nodes: NodeList[]) => void;
 const currentObservers = new Map<string, WatchCallback>();
 
-function puppeteerMutationListener(selector: string, nodes: any[]) {
+function puppeteerMutationListener(selector: string, nodes: NodeList[]) {
   const cb = currentObservers.get(selector);
   if (!cb) console.warn('no cb for selctor: ' + selector);
   else cb(nodes);
@@ -30,7 +32,7 @@ export async function watchElement(page: Page, selector: string, callback: Watch
     const jswindow = window as any;
     const target = document.querySelector(selector);
     const observer = new MutationObserver(mutationsList => {
-      let nodes = mutationsList.flatMap(m => m.addedNodes);
+      const nodes = mutationsList.flatMap(m => m.addedNodes);
       window.puppeteerMutationListener(selector, nodes);
     });
     observer.observe(
@@ -55,7 +57,7 @@ export async function stopWatchingElement(page: Page, selector: string) {
   }
 }
 
-export async function getWaitableWatcher(page: Page, selector: string, idletime: number = 250) {
+export async function getWaitableWatcher(page: Page, selector: string, idletime = 250) {
   // We cannot return our promise until we have setup the observers
   console.log('setting up watcher: ' + selector);
   const r = defer();
@@ -64,9 +66,8 @@ export async function getWaitableWatcher(page: Page, selector: string, idletime:
     await stopWatchingElement(page, selector);
     r.resolve()
   }, idletime)
-  await watchElement(page, selector, (nodes: any[]) => {
-    console.log(nodes);
-    rdelayed();
+  await watchElement(page, selector, () => {
+    void rdelayed();
   });
   return {
     changed: r

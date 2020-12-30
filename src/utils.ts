@@ -7,17 +7,14 @@ export async function readText(page: Page, selector: string|ElementHandle) {
 }
 
 export async function clickXPath(page: Page, xpath: string, index?: number) {
-  console.log('waiting for xpath');
   await page.waitForXPath(xpath)
   const elements = await page.$x(xpath);
-  console.log(`got ${elements.length} elements`);
   if ((
     elements.length == 1 && index === undefined) || 
     (index != undefined && elements.length > index)
   ){
     // clicking the elink
     await elements[index ?? 0].click();
-    console.log('clicked!');
     return true;
   }
   return false;
