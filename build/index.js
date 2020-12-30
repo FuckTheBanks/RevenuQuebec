@@ -53,6 +53,11 @@ class RQScraper {
             return rq;
         });
     }
+    release() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.browser.close();
+        });
+    }
 }
 exports.RQScraper = RQScraper;
 //# sourceMappingURL=index.js.map

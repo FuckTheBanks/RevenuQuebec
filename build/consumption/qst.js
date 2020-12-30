@@ -84,8 +84,17 @@ function scrapeData(page) {
             td.getAttribute("data-th"),
             td.innerText.trim()
         ])))));
-        return titles.map((t, index) => ({
-            periodEnding: t !== null && t !== void 0 ? t : "ERROR: Missing Title",
+        const periodDates = titles
+            .map(title => { var _a; return (_a = title === null || title === void 0 ? void 0 : title.match(/\d+\D\d+\D\d+/g)) !== null && _a !== void 0 ? _a : []; })
+            .map(dateArray => {
+            var _a, _b;
+            return ({
+                start: (_a = dateArray[0]) !== null && _a !== void 0 ? _a : "ERROR: Missing StartDate",
+                end: (_b = dateArray[1]) !== null && _b !== void 0 ? _b : "ERROR: Missing EndDate",
+            });
+        });
+        return periodDates.map((period, index) => ({
+            period,
             items: tables[index]
         }));
     });

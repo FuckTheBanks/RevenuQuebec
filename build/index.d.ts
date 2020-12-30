@@ -8,6 +8,7 @@ export declare class RQScraper {
     password: string;
     private constructor();
     static init(lang?: LanguageType, username?: string, password?: string, options?: puppeteer.LaunchOptions): Promise<RQScraper>;
+    release(): Promise<void>;
     fetchGstSOA: typeof fetchGstSOA;
     fetchQstSOA: typeof fetchQstSOA;
     login: () => Promise<puppeteer.Page>;

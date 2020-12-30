@@ -422,8 +422,8 @@
         "affectsGlobalScope": false
       },
       "../src/consumption/consumption.ts": {
-        "version": "5583865a9ff1e4502b4cce46e682080476c2be389c69902c36aad4d9ef1f977a",
-        "signature": "e46db9c149db438d1e8a0e5a9a66e1af70cf062e3e999566f28b0dde1f2939e1",
+        "version": "1138f57856257f1a5f00287cd9e4b0cc10261c998e7a63daf24c09355fe7e1a0",
+        "signature": "829e3fa9ed5ec16cdfa7181ed2fc8a70d64e17c37aa5eec438cb2a84a267f8b7",
         "affectsGlobalScope": false
       },
       "../src/consumption/gst.ts": {
@@ -502,7 +502,7 @@
         "affectsGlobalScope": false
       },
       "../src/consumption/qst.ts": {
-        "version": "7cb3b82c32bc8f9c7e583ebe1848639e0701e143a9b94585314e6f5d10a1d692",
+        "version": "9687db7f35e5a7bc1f371663ab7caf461c9bbc8dbc170fcd3bfe9d2d482098fc",
         "signature": "b1514c21dbcb93d91984b9e8d2140330fdbc61acbedc23c0feccf29957b9cf74",
         "affectsGlobalScope": false
       },
@@ -517,8 +517,8 @@
         "affectsGlobalScope": false
       },
       "../src/index.ts": {
-        "version": "ea8aae88790d14c2d735a6dfa068bc9ae19b24f4dc58fdd2ee3a7e5c294c2c11",
-        "signature": "1e080f8cbf62b4b9e0c9f2ff21d90740bce7949ae0c8c883f216e9c72188e5b1",
+        "version": "07343666ea96b94f45503540e81e62ae226c3c518e6ce80238bc37112617b81c",
+        "signature": "4d10d8a53a787fe084f4d8811687f04fefab1b1b034aae1a559c2bf7685076c3",
         "affectsGlobalScope": false
       },
       "../node_modules/jest-diff/build/cleanupsemantic.d.ts": {

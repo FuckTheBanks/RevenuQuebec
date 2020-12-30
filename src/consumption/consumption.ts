@@ -3,7 +3,10 @@ import { RQScraper } from "..";
 import { readText } from "../utils";
 
 export type Entry = {
-  periodEnding: string;
+  period: {
+    start?: string,
+    end: string,
+  }
   items: {
     date: string;
     amount: string;
@@ -42,7 +45,9 @@ export async function scrapeEntry(page: Page): Promise<Entry> {
 
   const p = rows.map(row => scrapeRow(page, row))
   return {
-    periodEnding: header,
+    period: {
+      end: header
+    },
     items: await Promise.all(p),
   }
 }

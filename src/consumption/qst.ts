@@ -83,8 +83,14 @@ async function scrapeData(page: Page) : Promise<Entry[]> {
     )
   )
 
-  return titles.map((t, index) => ({
-    periodEnding: t ?? "ERROR: Missing Title",
+  const periodDates = titles
+    .map(title => title?.match(/\d+\D\d+\D\d+/g) ?? [])
+    .map(dateArray => ({
+      start: dateArray[0] ?? "ERROR: Missing StartDate",
+      end: dateArray[1] ?? "ERROR: Missing EndDate",
+    }))
+  return periodDates.map((period, index) => ({
+    period,
     items: tables[index]
   }))
 }

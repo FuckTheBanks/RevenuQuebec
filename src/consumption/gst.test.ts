@@ -14,9 +14,10 @@ async function fetchAndTestAccount(file: string) {
 
   const r = await rq.fetchGstSOA(file);
   // ensure no duplicates (happened when update was too quick)
-  const entryCounts = r.reduce((dict, e) => dict.set(e.periodEnding, (dict.get(e.periodEnding) ?? 0) + 1), new Map<string, number>());
+  const entryCounts = r.reduce((dict, e) => dict.set(e.period.end, (dict.get(e.period.end) ?? 0) + 1), new Map<string, number>());
   expect(Math.max(...entryCounts.values())).toBe(1);
-
+  
+  await rq.release();
   console.log("Test Complete");
 }
 
@@ -33,5 +34,7 @@ test('can navigate pages', async () => {
   expect(r).toBeTruthy();
   r = await clickNextPage(page);
   expect(r).toBeFalsy();
+
+  await rq.release();
   console.log("Test Complete");
 })

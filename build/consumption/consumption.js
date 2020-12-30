@@ -38,7 +38,9 @@ function scrapeEntry(page) {
         const rows = yield page.$$("#detail-releve-compte table > tbody > tr");
         const p = rows.map(row => scrapeRow(page, row));
         return {
-            periodEnding: header,
+            period: {
+                end: header
+            },
             items: yield Promise.all(p),
         };
     });

@@ -40,6 +40,10 @@ export class RQScraper {
     return rq;
   }
 
+  public async release() {
+    await this.browser.close();
+  }
+
   ///////////////////////////////////////////////////////////////////////
   // Data scraping
   

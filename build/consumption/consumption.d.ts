@@ -1,7 +1,10 @@
 import { Page } from "puppeteer";
 import { RQScraper } from "..";
 export declare type Entry = {
-    periodEnding: string;
+    period: {
+        start?: string;
+        end: string;
+    };
     items: {
         date: string;
         amount: string;
