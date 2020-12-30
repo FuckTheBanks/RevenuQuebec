@@ -15,6 +15,17 @@ export type Entry = {
   }[];
 }
 
+  // Remove/standardize whatever character is being used on the website to delineate dates
+  export function cleanDate(str: string) : string;
+  export function cleanDate(str: string|undefined) : string|undefined;
+  export function cleanDate(str?: string) { 
+    return str?.trim().replace(/\D/g, '-'); 
+  }
+
+  export function extractDates(str?: string|null) {
+    const m = str?.match(/\d+\D\d+\D\d+/g) ?? [];
+    return m.map(d => cleanDate(d))
+  }
 
 export async function navigateToFile(scraper: RQScraper, file: string) {
   // Navigate to page
@@ -37,29 +48,4 @@ export async function navigateToFile(scraper: RQScraper, file: string) {
   await page.goto(href);
   return page;
 }
-
-
-export async function scrapeEntry(page: Page): Promise<Entry> {
-  const header = await readText(page, "#detail-releve-compte > div > h3");
-  const rows = await page.$$("#detail-releve-compte table > tbody > tr");
-
-  const p = rows.map(row => scrapeRow(page, row))
-  return {
-    period: {
-      end: header
-    },
-    items: await Promise.all(p),
-  }
-}
-
-async function scrapeRow(page: Page, row: ElementHandle) {
-  const tds = await row.$$('td');
-  return {
-    date: await readText(page, tds[0]),
-    description: await readText(page, tds[1]),
-    amount: await readText(page, tds[2]),
-    posted: await readText(page, tds[3])
-  };
-}
-
 

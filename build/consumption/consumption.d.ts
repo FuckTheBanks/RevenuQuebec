@@ -12,5 +12,7 @@ export declare type Entry = {
         posted?: string;
     }[];
 };
+export declare function cleanDate(str: string): string;
+export declare function cleanDate(str: string | undefined): string | undefined;
+export declare function extractDates(str?: string | null): string[];
 export declare function navigateToFile(scraper: RQScraper, file: string): Promise<Page>;
-export declare function scrapeEntry(page: Page): Promise<Entry>;

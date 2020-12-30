@@ -1,5 +1,5 @@
 import { Page } from "puppeteer";
-import { Entry, navigateToFile as navigateToFile } from "./consumption";
+import { cleanDate, Entry, extractDates, navigateToFile } from "./consumption";
 import { getWaitableWatcher } from "../watcher";
 import { sleep } from "../utils";
 import { RQScraper } from "..";
@@ -83,11 +83,8 @@ async function scrapeData(page: Page) : Promise<Entry[]> {
     )
   )
 
-  // Remove/standardize whatever character is being used on the website to delineate dates
-  const cleanDate = (str?: string) => str?.replace(/\D/g, '-') ?? "ERROR: Missing Date";
-
   const periodDates = titles
-    .map(title => title?.match(/\d+\D\d+\D\d+/g) ?? [])
+    .map(str => extractDates(str))
     .map(dateArray => ({
       start: cleanDate(dateArray[0]),
       end: cleanDate(dateArray[1]),

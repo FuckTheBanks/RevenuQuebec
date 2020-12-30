@@ -1,7 +1,7 @@
-import { Page } from "puppeteer";
+import { ElementHandle, Page } from "puppeteer";
 import { RQScraper } from "..";
-import { sleep } from "../utils";
-import { navigateToFile, scrapeEntry, Entry } from "./consumption";
+import { readText, sleep } from "../utils";
+import { navigateToFile, Entry, extractDates, cleanDate } from "./consumption";
 
 export async function fetchGstSOA(this: RQScraper, file: string) : Promise<Entry[]> {
 
@@ -58,3 +58,27 @@ export async function clickNextPage(page: Page) {
   }
   return false;
 }
+
+export async function scrapeEntry(page: Page): Promise<Entry> {
+  const header = await readText(page, "#detail-releve-compte > div > h3");
+  const rows = await page.$$("#detail-releve-compte table > tbody > tr");
+
+  const p = rows.map(row => scrapeRow(page, row))
+  return {
+    period: {
+      end: extractDates(header)[0]
+    },
+    items: await Promise.all(p),
+  }
+}
+
+async function scrapeRow(page: Page, row: ElementHandle) {
+  const tds = await row.$$('td');
+  return {
+    date: cleanDate(await readText(page, tds[0])),
+    description: await readText(page, tds[1]),
+    posted: cleanDate(await readText(page, tds[2])),
+    amount: await readText(page, tds[3]),
+  };
+}
+

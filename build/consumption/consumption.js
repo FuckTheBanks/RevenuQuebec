@@ -9,8 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.scrapeEntry = exports.navigateToFile = void 0;
-const utils_1 = require("../utils");
+exports.navigateToFile = exports.extractDates = exports.cleanDate = void 0;
+function cleanDate(str) {
+    return str === null || str === void 0 ? void 0 : str.trim().replace(/\D/g, '-');
+}
+exports.cleanDate = cleanDate;
+function extractDates(str) {
+    var _a;
+    const m = (_a = str === null || str === void 0 ? void 0 : str.match(/\d+\D\d+\D\d+/g)) !== null && _a !== void 0 ? _a : [];
+    return m.map(d => cleanDate(d));
+}
+exports.extractDates = extractDates;
 function navigateToFile(scraper, file) {
     return __awaiter(this, void 0, void 0, function* () {
         // Navigate to page
@@ -32,29 +41,4 @@ function navigateToFile(scraper, file) {
     });
 }
 exports.navigateToFile = navigateToFile;
-function scrapeEntry(page) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const header = yield utils_1.readText(page, "#detail-releve-compte > div > h3");
-        const rows = yield page.$$("#detail-releve-compte table > tbody > tr");
-        const p = rows.map(row => scrapeRow(page, row));
-        return {
-            period: {
-                end: header
-            },
-            items: yield Promise.all(p),
-        };
-    });
-}
-exports.scrapeEntry = scrapeEntry;
-function scrapeRow(page, row) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const tds = yield row.$$('td');
-        return {
-            date: yield utils_1.readText(page, tds[0]),
-            description: yield utils_1.readText(page, tds[1]),
-            amount: yield utils_1.readText(page, tds[2]),
-            posted: yield utils_1.readText(page, tds[3])
-        };
-    });
-}
 //# sourceMappingURL=consumption.js.map

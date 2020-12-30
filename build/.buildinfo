@@ -422,13 +422,13 @@
         "affectsGlobalScope": false
       },
       "../src/consumption/consumption.ts": {
-        "version": "1138f57856257f1a5f00287cd9e4b0cc10261c998e7a63daf24c09355fe7e1a0",
-        "signature": "829e3fa9ed5ec16cdfa7181ed2fc8a70d64e17c37aa5eec438cb2a84a267f8b7",
+        "version": "2bf67e45ce705a96fe1be6669626ecf37ed6d260ba92a974718178c9134319d5",
+        "signature": "3b369baec83291288d5219ff12908d5460f1b9ef4e1407fac7ce4fc478db4c0b",
         "affectsGlobalScope": false
       },
       "../src/consumption/gst.ts": {
-        "version": "037f6c220535ad23b8164374f8c1f115ea0d39981fe82b1a93a815961c57f7e0",
-        "signature": "4746e5253e2ba5d1b3f7777fee7d997410a7a37622b5c7c2e452d94a0d10c87b",
+        "version": "66983ec7d8fc9715c3ef72416f8ff501c09092656711f3d0a941908c4282dc34",
+        "signature": "03cbb662579e1302c4f5f529ae369701c8f93d21e23721055996bd175f798a4d",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/lodash/common/common.d.ts": {
@@ -502,7 +502,7 @@
         "affectsGlobalScope": false
       },
       "../src/consumption/qst.ts": {
-        "version": "6cb28919e24c5d7f4f416610872a684c3d7e213cbef5193f5617e0e85b4cb4f8",
+        "version": "f30a2507faf491b3a4a3a63455226af6f41e818a021284c1bdab26d753c85294",
         "signature": "b1514c21dbcb93d91984b9e8d2140330fdbc61acbedc23c0feccf29957b9cf74",
         "affectsGlobalScope": false
       },

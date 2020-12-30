@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.clickNextPage = exports.fetchGstSOA = void 0;
+exports.scrapeEntry = exports.clickNextPage = exports.fetchGstSOA = void 0;
 const utils_1 = require("../utils");
 const consumption_1 = require("./consumption");
 function fetchGstSOA(file) {
@@ -45,7 +45,7 @@ function iterateEntries(page) {
                 yield page.waitForSelector("#detail-releve-compte > div > h3");
             else
                 yield utils_1.sleep(125);
-            const period = yield consumption_1.scrapeEntry(page);
+            const period = yield scrapeEntry(page);
             r.push(period);
         }
         return r;
@@ -67,4 +67,29 @@ function clickNextPage(page) {
     });
 }
 exports.clickNextPage = clickNextPage;
+function scrapeEntry(page) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const header = yield utils_1.readText(page, "#detail-releve-compte > div > h3");
+        const rows = yield page.$$("#detail-releve-compte table > tbody > tr");
+        const p = rows.map(row => scrapeRow(page, row));
+        return {
+            period: {
+                end: consumption_1.extractDates(header)[0]
+            },
+            items: yield Promise.all(p),
+        };
+    });
+}
+exports.scrapeEntry = scrapeEntry;
+function scrapeRow(page, row) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const tds = yield row.$$('td');
+        return {
+            date: consumption_1.cleanDate(yield utils_1.readText(page, tds[0])),
+            description: yield utils_1.readText(page, tds[1]),
+            posted: consumption_1.cleanDate(yield utils_1.readText(page, tds[2])),
+            amount: yield utils_1.readText(page, tds[3]),
+        };
+    });
+}
 //# sourceMappingURL=gst.js.map
