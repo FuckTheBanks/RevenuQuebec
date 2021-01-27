@@ -9,12 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchQstSOA = void 0;
-const consumption_1 = require("./consumption");
+exports.fetchIncomeSOA = void 0;
+const consumption_1 = require("../consumption/consumption");
 const selectYear_1 = require("../selectYear");
-function fetchQstSOA(file = "TQ0001") {
+function fetchIncomeSOA(file = "IC0001") {
     return __awaiter(this, void 0, void 0, function* () {
-        const page = yield consumption_1.navigateToFile(this, file);
+        const page = yield this.navigateToFile(["Income Tax", "Statement of account"], file);
         // Get all years, then iterate through them scraping data
         const results = [];
         const years = yield selectYear_1.getAvailableYears(page);
@@ -29,17 +29,20 @@ function fetchQstSOA(file = "TQ0001") {
         return results;
     });
 }
-exports.fetchQstSOA = fetchQstSOA;
+exports.fetchIncomeSOA = fetchIncomeSOA;
 function scrapeData(page) {
     return __awaiter(this, void 0, void 0, function* () {
         // Get all titles
         const titles = yield page.$$eval("#detailsperiodes > h3", h3s => h3s.map(h3 => h3.textContent));
         const tables = yield page.$$eval("#detailsperiodes table > tbody", tables => tables.map(table => 
         // each row maps to an entry
-        [...table.querySelectorAll("tr")].map(row => Object.fromEntries([...row.querySelectorAll("td")].map(td => [
-            td.getAttribute("data-th"),
-            td.innerText.trim()
-        ])))));
+        [...table.querySelectorAll("tr")].map(row => Object.fromEntries([...row.querySelectorAll("td")].map((td, idx) => {
+            var _a;
+            return [
+                (_a = td.getAttribute("data-th")) !== null && _a !== void 0 ? _a : idx,
+                td.innerText.trim()
+            ];
+        })))));
         const periodDates = titles
             .map(str => consumption_1.extractDates(str))
             .map(dateArray => ({
@@ -48,12 +51,15 @@ function scrapeData(page) {
         }));
         return periodDates.map((period, index) => ({
             period,
-            items: tables[index].map(item => ({
-                amount: item.Amount,
-                description: item.Description,
-                date: consumption_1.cleanDate(item.Date)
-            }))
+            items: tables[index].map(item => {
+                var _a, _b;
+                return ({
+                    amount: (_a = item.Amount) !== null && _a !== void 0 ? _a : item[0],
+                    description: (_b = item.Description) !== null && _b !== void 0 ? _b : item[1],
+                    date: consumption_1.cleanDate(item.Date)
+                });
+            })
         }));
     });
 }
-//# sourceMappingURL=qst.js.map
+//# sourceMappingURL=index.js.map

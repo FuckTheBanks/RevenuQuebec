@@ -2,8 +2,10 @@
 import puppeteer from 'puppeteer';
 import { fetchGstSOA } from './consumption/gst';
 import { fetchQstSOA } from './consumption/qst';
+import { fetchIncomeSOA } from './income';
 import { LanguageType, selectLanguage } from './language';
 import { login } from './login';
+import { navigateToFile } from './navigate';
 
 
 export class RQScraper {
@@ -49,9 +51,14 @@ export class RQScraper {
   
   public fetchGstSOA = fetchGstSOA;
   public fetchQstSOA = fetchQstSOA;
+
+  public fetchIncomeSOA = fetchIncomeSOA;
   
   ///////////////////////////////////////////////////////////////////////
   // Helper functions
+
+  public navigateToFile = navigateToFile;
+  
   public login = () => login(this.browser, this.username, this.password);
   public newPage = async (url?: string) => {
     const page = await this.browser.newPage();

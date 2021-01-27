@@ -1,11 +1,14 @@
-import { Page } from "puppeteer";
-import { cleanDate, Entry, extractDates, navigateToFile } from "./consumption";
+import { ElementHandle, Page } from "puppeteer";
 import { RQScraper } from "..";
+import { cleanDate, Entry, extractDates } from "../consumption/consumption";
 import { getAvailableYears, selectAndViewYear } from "../selectYear";
 
-export async function fetchQstSOA(this: RQScraper, file="TQ0001") : Promise<Entry[]> {
+export async function fetchIncomeSOA(this: RQScraper, file="IC0001") : Promise<Entry[]> {
 
-  const page = await navigateToFile(this, file);
+  const page = await this.navigateToFile(
+    ["Income Tax", "Statement of account"],
+    file
+    );
 
   // Get all years, then iterate through them scraping data
   const results = [];
@@ -21,7 +24,6 @@ export async function fetchQstSOA(this: RQScraper, file="TQ0001") : Promise<Entr
   return results;
 }
 
-
 async function scrapeData(page: Page) : Promise<Entry[]> {
   // Get all titles
   const titles = await page.$$eval("#detailsperiodes > h3", h3s => h3s.map(h3 => h3.textContent));
@@ -30,9 +32,9 @@ async function scrapeData(page: Page) : Promise<Entry[]> {
       // each row maps to an entry
       [...table.querySelectorAll("tr")].map(row =>        
         Object.fromEntries(
-          [...row.querySelectorAll("td")].map(td => 
+          [...row.querySelectorAll("td")].map((td, idx) => 
             [
-              td.getAttribute("data-th"), 
+              td.getAttribute("data-th") ?? idx, 
               td.innerText.trim()
             ]
           )
@@ -50,8 +52,8 @@ async function scrapeData(page: Page) : Promise<Entry[]> {
   return periodDates.map((period, index) => ({
     period,
     items: tables[index].map(item => ({
-      amount: item.Amount,
-      description: item.Description,
+      amount: item.Amount ?? item[0],
+      description: item.Description ?? item[1],
       date: cleanDate(item.Date)
     }))
   }))

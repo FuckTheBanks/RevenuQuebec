@@ -172,7 +172,7 @@
         "affectsGlobalScope": true
       },
       "../src/defer.ts": {
-        "version": "dc01c2126ec6669fdbce613ecbecb34010d2fd2e5032b801586cbbb41962b3a2",
+        "version": "bb802d17b732921ffada793eaebbceb5a7148ed8529ca335ed4ac1465f548b1c",
         "signature": "952a1c0ce4dd05e620089a87f48cba0812b4bde2aec082f97689805e7931e6a1",
         "affectsGlobalScope": false
       },
@@ -417,17 +417,17 @@
         "affectsGlobalScope": false
       },
       "../src/utils.ts": {
-        "version": "bf85abbea955831201077dba5033653f4f3ad25a1b7218e8c4f8aefa2ed3c6a9",
+        "version": "85d831aab46f87ae37c802a86525ad2cf27fcc9c045f8d2ed7255aa8b45aa4aa",
         "signature": "d8d34a417e075bee68a051d69796a912e968811585f11d5bdae5a210a93567b2",
         "affectsGlobalScope": false
       },
       "../src/consumption/consumption.ts": {
-        "version": "2bf67e45ce705a96fe1be6669626ecf37ed6d260ba92a974718178c9134319d5",
+        "version": "e7c453ce6891e454f57ebfc6f9fc2d950913ecc7b80d089e19b58ee02f387df3",
         "signature": "3b369baec83291288d5219ff12908d5460f1b9ef4e1407fac7ce4fc478db4c0b",
         "affectsGlobalScope": false
       },
       "../src/consumption/gst.ts": {
-        "version": "66983ec7d8fc9715c3ef72416f8ff501c09092656711f3d0a941908c4282dc34",
+        "version": "689ea2a973ff27057b354bc3fa211e57369ff71ce69b8d030db84f06f79a3ab8",
         "signature": "03cbb662579e1302c4f5f529ae369701c8f93d21e23721055996bd175f798a4d",
         "affectsGlobalScope": false
       },
@@ -497,13 +497,23 @@
         "affectsGlobalScope": true
       },
       "../src/watcher.ts": {
-        "version": "5636aef682d9070158c246bd013211afc0f5f27f4d2e1f38e7e26b1409dae679",
+        "version": "4595f42fab1f2ce2f8c066b82d44db43e0f7c9d7ef7e762a8921891a6ef29e26",
         "signature": "1ab792321f3f0d3ef309fa69c7ed408ad2798064c40c2689345876ec85e5211d",
         "affectsGlobalScope": false
       },
+      "../src/selectyear.ts": {
+        "version": "e6db2fc27d591485780d951976f3bf92655bc1bdba1354bf80e2027a9a25c20f",
+        "signature": "37d9a0ae9ef6611e804a65bc43ccec1e96327293bded34c041eedc0577ecf5c0",
+        "affectsGlobalScope": false
+      },
       "../src/consumption/qst.ts": {
-        "version": "f30a2507faf491b3a4a3a63455226af6f41e818a021284c1bdab26d753c85294",
-        "signature": "b1514c21dbcb93d91984b9e8d2140330fdbc61acbedc23c0feccf29957b9cf74",
+        "version": "dce0a693ea28b7ca4d2656faddb342a0259c7dfb0abe0f938758a45026bcab76",
+        "signature": "f57628b78b137e0c8c73fbccf32387a14fc9af0a386eca71ba656a988890ad88",
+        "affectsGlobalScope": false
+      },
+      "../src/income/index.ts": {
+        "version": "aff191e0bd8f85a788b1456088773c408baaed9b385475e36e77cd4ab433f0b4",
+        "signature": "ac70911f34f7a07fae3b83334f8d3866e5ba1675c12831217ccc21aa79b0b298",
         "affectsGlobalScope": false
       },
       "../src/login.ts": {
@@ -516,9 +526,14 @@
         "signature": "d49e51306367a8f9d8baeb8410eaea5704a42052543b48fef2dc553a51bb16d6",
         "affectsGlobalScope": false
       },
+      "../src/navigate.ts": {
+        "version": "747b394043afc2a2dff281c46ae3f565a59edb25dfc979384bc30bcb5b31f76f",
+        "signature": "55b612bd2e63343c2208ba9636306690a85e5e565b9d21743ccdfbfcccf23d3f",
+        "affectsGlobalScope": false
+      },
       "../src/index.ts": {
-        "version": "07343666ea96b94f45503540e81e62ae226c3c518e6ce80238bc37112617b81c",
-        "signature": "4d10d8a53a787fe084f4d8811687f04fefab1b1b034aae1a559c2bf7685076c3",
+        "version": "08c2d954380d3732a1db477a72fade5c827ee5e2ffc54504d08fcbbead689e71",
+        "signature": "085f6e03d66916bcf89b23f33b557350fe4aebbfcc9c973ae4c159316f572633",
         "affectsGlobalScope": false
       },
       "../node_modules/jest-diff/build/cleanupsemantic.d.ts": {
@@ -979,15 +994,22 @@
         "../node_modules/@types/puppeteer/index.d.ts",
         "../src/consumption/consumption.ts",
         "../src/index.ts",
-        "../src/utils.ts",
-        "../src/watcher.ts"
+        "../src/selectyear.ts"
+      ],
+      "../src/income/index.ts": [
+        "../node_modules/@types/puppeteer/index.d.ts",
+        "../src/consumption/consumption.ts",
+        "../src/index.ts",
+        "../src/selectyear.ts"
       ],
       "../src/index.ts": [
         "../node_modules/@types/puppeteer/index.d.ts",
         "../src/consumption/gst.ts",
         "../src/consumption/qst.ts",
+        "../src/income/index.ts",
         "../src/language.ts",
-        "../src/login.ts"
+        "../src/login.ts",
+        "../src/navigate.ts"
       ],
       "../src/language.ts": [
         "../node_modules/@types/puppeteer/index.d.ts",
@@ -996,6 +1018,17 @@
       ],
       "../src/login.ts": [
         "../node_modules/@types/puppeteer/index.d.ts"
+      ],
+      "../src/navigate.ts": [
+        "../node_modules/@types/puppeteer/index.d.ts",
+        "../src/index.ts",
+        "../src/utils.ts"
+      ],
+      "../src/selectyear.ts": [
+        "../node_modules/@types/lodash/index.d.ts",
+        "../node_modules/@types/puppeteer/index.d.ts",
+        "../src/utils.ts",
+        "../src/watcher.ts"
       ],
       "../src/utils.ts": [
         "../node_modules/@types/puppeteer/index.d.ts"
@@ -1394,16 +1427,29 @@
         "../src/consumption/consumption.ts",
         "../src/index.ts"
       ],
+      "../src/income/index.ts": [
+        "../src/consumption/consumption.ts",
+        "../src/index.ts"
+      ],
       "../src/index.ts": [
         "../node_modules/@types/puppeteer/index.d.ts",
         "../src/consumption/gst.ts",
         "../src/consumption/qst.ts",
-        "../src/language.ts"
+        "../src/income/index.ts",
+        "../src/language.ts",
+        "../src/navigate.ts"
       ],
       "../src/language.ts": [
         "../node_modules/@types/puppeteer/index.d.ts"
       ],
       "../src/login.ts": [
+        "../node_modules/@types/puppeteer/index.d.ts"
+      ],
+      "../src/navigate.ts": [
+        "../node_modules/@types/puppeteer/index.d.ts",
+        "../src/index.ts"
+      ],
+      "../src/selectyear.ts": [
         "../node_modules/@types/puppeteer/index.d.ts"
       ],
       "../src/utils.ts": [
@@ -1521,9 +1567,12 @@
       "../src/consumption/gst.ts",
       "../src/consumption/qst.ts",
       "../src/defer.ts",
+      "../src/income/index.ts",
       "../src/index.ts",
       "../src/language.ts",
       "../src/login.ts",
+      "../src/navigate.ts",
+      "../src/selectyear.ts",
       "../src/utils.ts",
       "../src/watcher.ts"
     ]

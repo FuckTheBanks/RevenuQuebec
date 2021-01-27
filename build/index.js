@@ -16,8 +16,10 @@ exports.RQScraper = void 0;
 const puppeteer_1 = __importDefault(require("puppeteer"));
 const gst_1 = require("./consumption/gst");
 const qst_1 = require("./consumption/qst");
+const income_1 = require("./income");
 const language_1 = require("./language");
 const login_1 = require("./login");
+const navigate_1 = require("./navigate");
 class RQScraper {
     ///////////////////////////////////////////////////////////////////////
     // Construction functions
@@ -26,8 +28,10 @@ class RQScraper {
         // Data scraping
         this.fetchGstSOA = gst_1.fetchGstSOA;
         this.fetchQstSOA = qst_1.fetchQstSOA;
+        this.fetchIncomeSOA = income_1.fetchIncomeSOA;
         ///////////////////////////////////////////////////////////////////////
         // Helper functions
+        this.navigateToFile = navigate_1.navigateToFile;
         this.login = () => login_1.login(this.browser, this.username, this.password);
         this.newPage = (url) => __awaiter(this, void 0, void 0, function* () {
             const page = yield this.browser.newPage();
