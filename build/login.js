@@ -26,6 +26,7 @@ exports.login = login;
 function closePopup(page) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            yield page.click("#kx-modal-pedagogique .kx-checkbox");
             yield page.click("#kx-modal-pedagogique-fermer");
         }
         catch (_a) {

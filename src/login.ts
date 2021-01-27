@@ -18,6 +18,7 @@ export async function login(browser: Browser, username: string, password: string
 
 export async function closePopup(page: Page) {
   try {
+    await page.click("#kx-modal-pedagogique .kx-checkbox");
     await page.click("#kx-modal-pedagogique-fermer");
   }
   catch { 

@@ -10,14 +10,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.selectLanguage = void 0;
-const login_1 = require("./login");
 const utils_1 = require("./utils");
 function selectLanguage(page, language) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            yield utils_1.sleep(100);
             yield utils_1.clickLink(page, language);
             console.log(`Switched language to: ${language}`);
-            yield login_1.closePopup(page);
+            yield utils_1.sleep(100);
+            //await closePopup(page);
         }
         catch (e) {
             // do nothing
