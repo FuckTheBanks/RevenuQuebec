@@ -16,7 +16,14 @@ function cleanDate(str) {
 exports.cleanDate = cleanDate;
 function extractDates(str) {
     var _a;
-    const m = (_a = str === null || str === void 0 ? void 0 : str.match(/\d+\D\d+\D\d+/g)) !== null && _a !== void 0 ? _a : [];
+    let m = str === null || str === void 0 ? void 0 : str.match(/(\d+) \(Summary\)/);
+    if (m) {
+        return [
+            `${m[1]}-01-01`,
+            `${m[1]}-12-31`,
+        ];
+    }
+    m = (_a = str === null || str === void 0 ? void 0 : str.match(/\d+\D\d+\D\d+/g)) !== null && _a !== void 0 ? _a : [];
     return m.map(d => cleanDate(d));
 }
 exports.extractDates = extractDates;

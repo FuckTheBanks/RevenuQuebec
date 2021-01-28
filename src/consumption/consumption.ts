@@ -1,6 +1,4 @@
-import { ElementHandle, Page } from "puppeteer";
 import { RQScraper } from "..";
-import { readText } from "../utils";
 
 export type Entry = {
   period: {
@@ -23,7 +21,14 @@ export type Entry = {
   }
 
   export function extractDates(str?: string|null) {
-    const m = str?.match(/\d+\D\d+\D\d+/g) ?? [];
+    let m = str?.match(/(\d+) \(Summary\)/)
+    if (m) {
+      return [
+        `${m[1]}-01-01`,
+        `${m[1]}-12-31`,
+      ]
+    }
+    m = str?.match(/\d+\D\d+\D\d+/g) ?? [];
     return m.map(d => cleanDate(d))
   }
 

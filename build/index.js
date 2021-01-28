@@ -17,6 +17,7 @@ const puppeteer_1 = __importDefault(require("puppeteer"));
 const gst_1 = require("./consumption/gst");
 const qst_1 = require("./consumption/qst");
 const income_1 = require("./income");
+const sourceDeductions_1 = require("./sourceDeductions");
 const language_1 = require("./language");
 const login_1 = require("./login");
 const navigate_1 = require("./navigate");
@@ -29,6 +30,7 @@ class RQScraper {
         this.fetchGstSOA = gst_1.fetchGstSOA;
         this.fetchQstSOA = qst_1.fetchQstSOA;
         this.fetchIncomeSOA = income_1.fetchIncomeSOA;
+        this.fetchSourceDeductionsSOA = sourceDeductions_1.fetchSourceDeductionsSOA;
         ///////////////////////////////////////////////////////////////////////
         // Helper functions
         this.navigateToFile = navigate_1.navigateToFile;

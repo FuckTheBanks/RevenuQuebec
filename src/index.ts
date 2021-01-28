@@ -3,6 +3,7 @@ import puppeteer from 'puppeteer';
 import { fetchGstSOA } from './consumption/gst';
 import { fetchQstSOA } from './consumption/qst';
 import { fetchIncomeSOA } from './income';
+import { fetchSourceDeductionsSOA } from './sourceDeductions';
 import { LanguageType, selectLanguage } from './language';
 import { login } from './login';
 import { navigateToFile } from './navigate';
@@ -53,6 +54,7 @@ export class RQScraper {
   public fetchQstSOA = fetchQstSOA;
 
   public fetchIncomeSOA = fetchIncomeSOA;
+  public fetchSourceDeductionsSOA = fetchSourceDeductionsSOA;
   
   ///////////////////////////////////////////////////////////////////////
   // Helper functions

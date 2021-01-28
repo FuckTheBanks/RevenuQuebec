@@ -59,10 +59,8 @@ export async function stopWatchingElement(page: Page, selector: string) {
 
 export async function getWaitableWatcher(page: Page, selector: string, idletime = 250) {
   // We cannot return our promise until we have setup the observers
-  console.log('setting up watcher: ' + selector);
   const r = defer();
   const rdelayed = debounce(async () => {
-    console.log(`** watcher completed ${selector} **`);
     await stopWatchingElement(page, selector);
     r.resolve()
   }, idletime)
