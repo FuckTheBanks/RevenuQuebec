@@ -14,12 +14,12 @@ const consumption_1 = require("./consumption");
 const selectYear_1 = require("../selectYear");
 function fetchQstSOA(file = "TQ0001") {
     return __awaiter(this, void 0, void 0, function* () {
-        const page = yield consumption_1.navigateToFile(this, file);
+        const page = yield (0, consumption_1.navigateToFile)(this, file);
         // Get all years, then iterate through them scraping data
         const results = [];
-        const years = yield selectYear_1.getAvailableYears(page);
+        const years = yield (0, selectYear_1.getAvailableYears)(page);
         for (const year of years) {
-            const ready = yield selectYear_1.selectAndViewYear(page, year);
+            const ready = yield (0, selectYear_1.selectAndViewYear)(page, year);
             if (ready) {
                 const data = yield scrapeData(page);
                 results.push(...data);
@@ -41,17 +41,17 @@ function scrapeData(page) {
             td.innerText.trim()
         ])))));
         const periodDates = titles
-            .map(str => consumption_1.extractDates(str))
+            .map(str => (0, consumption_1.extractDates)(str))
             .map(dateArray => ({
-            start: consumption_1.cleanDate(dateArray[0]),
-            end: consumption_1.cleanDate(dateArray[1]),
+            start: (0, consumption_1.cleanDate)(dateArray[0]),
+            end: (0, consumption_1.cleanDate)(dateArray[1]),
         }));
         return periodDates.map((period, index) => ({
             period,
             items: tables[index].map(item => ({
                 amount: item.Amount,
                 description: item.Description,
-                date: consumption_1.cleanDate(item.Date)
+                date: (0, consumption_1.cleanDate)(item.Date)
             }))
         }));
     });

@@ -12,6 +12,6 @@ export async function selectLanguage(page: Page, language: LanguageType) {
   }
   catch (e) {
     // do nothing
-    console.log(`Couldnt switch lang: ${e.message}`);
+    console.log(`Couldnt switch lang: ${(e as Error).message}`);
   }
 } 

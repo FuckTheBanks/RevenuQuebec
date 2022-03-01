@@ -62,8 +62,8 @@ exports.stopWatchingElement = stopWatchingElement;
 function getWaitableWatcher(page, selector, idletime = 250) {
     return __awaiter(this, void 0, void 0, function* () {
         // We cannot return our promise until we have setup the observers
-        const r = defer_1.defer();
-        const rdelayed = lodash_1.debounce(() => __awaiter(this, void 0, void 0, function* () {
+        const r = (0, defer_1.defer)();
+        const rdelayed = (0, lodash_1.debounce)(() => __awaiter(this, void 0, void 0, function* () {
             yield stopWatchingElement(page, selector);
             r.resolve();
         }), idletime);

@@ -34,11 +34,11 @@ class RQScraper {
         ///////////////////////////////////////////////////////////////////////
         // Helper functions
         this.navigateToFile = navigate_1.navigateToFile;
-        this.login = () => login_1.login(this.browser, this.username, this.password);
+        this.login = () => (0, login_1.login)(this.browser, this.username, this.password);
         this.newPage = (url) => __awaiter(this, void 0, void 0, function* () {
             const page = yield this.browser.newPage();
             yield page.goto(url !== null && url !== void 0 ? url : "https://entreprises.revenuquebec.ca/EntPres/SX/SX00/sx00.Portail.PIU/SX00A01/");
-            yield login_1.closePopup(page);
+            yield (0, login_1.closePopup)(page);
             return page;
         });
         this.browser = browser;
@@ -55,7 +55,7 @@ class RQScraper {
             const rq = new RQScraper(browser, user, pwd);
             const page = yield rq.login();
             if (lang)
-                yield language_1.selectLanguage(page, lang);
+                yield (0, language_1.selectLanguage)(page, lang);
             yield page.close();
             return rq;
         });

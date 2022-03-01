@@ -37,7 +37,7 @@ function navigateMenu(page, menuEntries) {
         let search = '//*[@id="nav-mobile-main"]';
         // Navigate through the options, click by case insenstive text
         for (const entry of menuEntries) {
-            yield utils_1.sleep(250);
+            yield (0, utils_1.sleep)(250);
             const toLower = "translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')";
             const path = `${search}/descendant::node()/child::*[contains(${toLower}, '${entry.toLowerCase()}')]`;
             const elements = yield page.$x(path);

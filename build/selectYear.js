@@ -29,7 +29,7 @@ function selectAndViewYear(page, year) {
             return false;
         if (!(yield selectAllPeriods(page)))
             return false;
-        const watcher = yield watcher_1.getWaitableWatcher(page, "#detailsperiodes");
+        const watcher = yield (0, watcher_1.getWaitableWatcher)(page, "#detailsperiodes");
         yield page.click("#btnconsulter");
         yield watcher.changed;
         return true;
@@ -42,7 +42,7 @@ function selectAllPeriods(page) {
             yield page.waitForSelector("a.selectallperiodes");
             while (!(yield page.$("tr.active-selectall"))) {
                 yield page.click("a.selectallperiodes");
-                yield utils_1.sleep(50);
+                yield (0, utils_1.sleep)(50);
             }
             return true;
         }
@@ -56,20 +56,20 @@ function setYear(page, year) {
         // let's make sure this change is actually a change - if not we indefinitely hang
         const current = yield page.$eval("#DossierSelectionner_AnneeSelectionneeTexte", sel => sel.value);
         if (current != `${year}`) {
-            const watcher = yield watcher_1.getWaitableWatcher(page, "#tableauperiodes", 250);
+            const watcher = yield (0, watcher_1.getWaitableWatcher)(page, "#tableauperiodes", 250);
             yield page.select("#DossierSelectionner_AnneeSelectionneeTexte", `${year}`);
             yield watcher.changed;
             // We must wait for the select-all to be deselected
             while (yield page.$("tr.active-selectall"))
-                yield utils_1.sleep(50);
+                yield (0, utils_1.sleep)(50);
         }
         else {
-            yield utils_1.sleep(250);
+            yield (0, utils_1.sleep)(250);
         }
         // If the page shows an alert, there are no entries
         const alert = yield page.$("#tableauperiodes > div > div.kx-alert-text");
         if (alert) {
-            const text = yield utils_1.readText(page, alert);
+            const text = yield (0, utils_1.readText)(page, alert);
             console.warn(`Fetch ${year} failed - ${text}`);
             return false;
         }

@@ -14,10 +14,10 @@ const utils_1 = require("./utils");
 function selectLanguage(page, language) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield utils_1.sleep(100);
-            yield utils_1.clickLink(page, language);
+            yield (0, utils_1.sleep)(100);
+            yield (0, utils_1.clickLink)(page, language);
             console.log(`Switched language to: ${language}`);
-            yield utils_1.sleep(100);
+            yield (0, utils_1.sleep)(100);
             //await closePopup(page);
         }
         catch (e) {

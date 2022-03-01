@@ -17,9 +17,9 @@ function fetchIncomeSOA(file = "IC0001") {
         const page = yield this.navigateToFile(["Income Tax", "Statement of account"], file);
         // Get all years, then iterate through them scraping data
         const results = [];
-        const years = yield selectYear_1.getAvailableYears(page);
+        const years = yield (0, selectYear_1.getAvailableYears)(page);
         for (const year of years) {
-            const ready = yield selectYear_1.selectAndViewYear(page, year);
+            const ready = yield (0, selectYear_1.selectAndViewYear)(page, year);
             if (ready) {
                 const data = yield scrapeData(page);
                 results.push(...data);
@@ -44,10 +44,10 @@ function scrapeData(page) {
             ];
         })))));
         const periodDates = titles
-            .map(str => consumption_1.extractDates(str))
+            .map(str => (0, consumption_1.extractDates)(str))
             .map(dateArray => ({
-            start: consumption_1.cleanDate(dateArray[0]),
-            end: consumption_1.cleanDate(dateArray[1]),
+            start: (0, consumption_1.cleanDate)(dateArray[0]),
+            end: (0, consumption_1.cleanDate)(dateArray[1]),
         }));
         return periodDates.map((period, index) => ({
             period,
@@ -56,7 +56,7 @@ function scrapeData(page) {
                 return ({
                     amount: (_a = item.Amount) !== null && _a !== void 0 ? _a : item[0],
                     description: (_b = item.Description) !== null && _b !== void 0 ? _b : item[1],
-                    date: consumption_1.cleanDate(item.Date)
+                    date: (0, consumption_1.cleanDate)(item.Date)
                 });
             })
         }));

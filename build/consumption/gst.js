@@ -15,8 +15,8 @@ const consumption_1 = require("./consumption");
 function fetchGstSOA(file) {
     return __awaiter(this, void 0, void 0, function* () {
         const results = [];
-        const page = yield consumption_1.navigateToFile(this, file);
-        yield utils_1.sleep(1000); // defensive sleep: We have hit an error a few times here
+        const page = yield (0, consumption_1.navigateToFile)(this, file);
+        yield (0, utils_1.sleep)(1000); // defensive sleep: We have hit an error a few times here
         // fetch page entries, then click "Next Page" button
         do {
             const pageResults = yield iterateEntries(page);
@@ -32,10 +32,10 @@ function iterateEntries(page) {
         const entries = yield page.$$("#rechercheParPeriodeTableau table > tbody > tr > :first-child > a");
         const r = [];
         for (let i = 0; i < entries.length; i++) {
-            yield utils_1.sleep(50); // flush console log
+            yield (0, utils_1.sleep)(50); // flush console log
             yield page.click(`#rechercheParPeriodeTableau table > tbody > :nth-child(${i + 1}) > :first-child > a`);
             yield page.waitForResponse(() => true);
-            yield utils_1.sleep(125); // Wait for the DOM update
+            yield (0, utils_1.sleep)(125); // Wait for the DOM update
             yield page.click("#consulter-declaration-selectionnee");
             yield page.waitForResponse(() => true);
             // Wait for the DOM update.  We cannot wait the element here
@@ -45,7 +45,7 @@ function iterateEntries(page) {
             if (i == 0)
                 yield page.waitForSelector("#detail-releve-compte > div > h3");
             else
-                yield utils_1.sleep(125);
+                yield (0, utils_1.sleep)(125);
             const period = yield scrapeEntry(page);
             r.push(period);
         }
@@ -61,7 +61,7 @@ function clickNextPage(page) {
             // the response alone is insufficient to wait for the DOM update
             // we add a manual wait here to allow the update to complete.
             // there is probably a deterministic way to do this, but it works for me now
-            yield utils_1.sleep(250);
+            yield (0, utils_1.sleep)(250);
             return true;
         }
         return false;
@@ -70,12 +70,12 @@ function clickNextPage(page) {
 exports.clickNextPage = clickNextPage;
 function scrapeEntry(page) {
     return __awaiter(this, void 0, void 0, function* () {
-        const header = yield utils_1.readText(page, "#detail-releve-compte > div > h3");
+        const header = yield (0, utils_1.readText)(page, "#detail-releve-compte > div > h3");
         const rows = yield page.$$("#detail-releve-compte table > tbody > tr");
         const p = rows.map(row => scrapeRow(page, row));
         return {
             period: {
-                end: consumption_1.extractDates(header)[0]
+                end: (0, consumption_1.extractDates)(header)[0]
             },
             items: yield Promise.all(p),
         };
@@ -86,10 +86,10 @@ function scrapeRow(page, row) {
     return __awaiter(this, void 0, void 0, function* () {
         const tds = yield row.$$('td');
         return {
-            date: consumption_1.cleanDate(yield utils_1.readText(page, tds[0])),
-            description: yield utils_1.readText(page, tds[1]),
-            posted: consumption_1.cleanDate(yield utils_1.readText(page, tds[2])),
-            amount: yield utils_1.readText(page, tds[3]),
+            date: (0, consumption_1.cleanDate)(yield (0, utils_1.readText)(page, tds[0])),
+            description: yield (0, utils_1.readText)(page, tds[1]),
+            posted: (0, consumption_1.cleanDate)(yield (0, utils_1.readText)(page, tds[2])),
+            amount: yield (0, utils_1.readText)(page, tds[3]),
         };
     });
 }
