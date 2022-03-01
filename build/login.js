@@ -15,6 +15,9 @@ function login(browser, username, password) {
         const page = yield browser.newPage();
         yield page.goto('https://entreprises.revenuquebec.ca/EntPres/SX/SX00/sx00.Portail.PIU/SX00A01/?CLNG=A');
         yield page.type("#AuthUtilisateur1_Authentificationidpwd1_txtCodeUtils", username);
+        const waiter = page.waitForNavigation();
+        yield page.click('#AuthUtilisateur1_ContinuerRecaptcha');
+        yield waiter;
         yield page.type("#AuthUtilisateur1_Authentificationidpwd1_txtMotPasse", password);
         yield page.click("#AuthUtilisateur1_rubBouton_btnContinuer");
         yield page.waitForNavigation();

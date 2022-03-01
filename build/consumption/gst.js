@@ -16,6 +16,7 @@ function fetchGstSOA(file) {
     return __awaiter(this, void 0, void 0, function* () {
         const results = [];
         const page = yield consumption_1.navigateToFile(this, file);
+        yield utils_1.sleep(1000); // defensive sleep: We have hit an error a few times here
         // fetch page entries, then click "Next Page" button
         do {
             const pageResults = yield iterateEntries(page);

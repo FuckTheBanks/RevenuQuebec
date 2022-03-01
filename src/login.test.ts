@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import puppeteer from 'puppeteer';
 import { login } from './login';
+require("dotenv").config();
 
 test('login completes', async () => {
 

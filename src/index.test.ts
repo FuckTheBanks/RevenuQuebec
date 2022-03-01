@@ -1,4 +1,5 @@
 import { RQScraper } from "..";
+require("dotenv").config();
 
 beforeEach(() => {
   jest.setTimeout(5 * 60 * 1000)
@@ -7,7 +8,7 @@ beforeEach(() => {
 it('can complete multiple actions', async () => {
   
   const rq = await RQScraper.init("EN", undefined, undefined, {
-    headless: true
+    headless: false
   });
   console.log("scraper initialized");
   

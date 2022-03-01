@@ -7,6 +7,7 @@ export async function fetchGstSOA(this: RQScraper, file: string) : Promise<Entry
 
   const results = [];
   const page = await navigateToFile(this, file);
+  await sleep(1000); // defensive sleep: We have hit an error a few times here
 
   // fetch page entries, then click "Next Page" button
   do {

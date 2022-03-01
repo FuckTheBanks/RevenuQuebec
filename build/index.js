@@ -38,6 +38,7 @@ class RQScraper {
         this.newPage = (url) => __awaiter(this, void 0, void 0, function* () {
             const page = yield this.browser.newPage();
             yield page.goto(url !== null && url !== void 0 ? url : "https://entreprises.revenuquebec.ca/EntPres/SX/SX00/sx00.Portail.PIU/SX00A01/");
+            yield login_1.closePopup(page);
             return page;
         });
         this.browser = browser;

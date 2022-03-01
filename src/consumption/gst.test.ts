@@ -1,7 +1,7 @@
 import { RQScraper } from '..';
 import { navigateToFile } from './consumption';
 import { clickNextPage } from './gst';
-
+require("dotenv").config();
 
 beforeEach(() => {
   jest.setTimeout(5 * 60 * 1000)

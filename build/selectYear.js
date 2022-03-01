@@ -27,7 +27,8 @@ function selectAndViewYear(page, year) {
         console.log(`Scraping year: ${year}`);
         if (!(yield setYear(page, year)))
             return false;
-        yield selectAllPeriods(page);
+        if (!(yield selectAllPeriods(page)))
+            return false;
         const watcher = yield watcher_1.getWaitableWatcher(page, "#detailsperiodes");
         yield page.click("#btnconsulter");
         yield watcher.changed;
@@ -37,10 +38,16 @@ function selectAndViewYear(page, year) {
 exports.selectAndViewYear = selectAndViewYear;
 function selectAllPeriods(page) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield page.waitForSelector("a.selectallperiodes");
-        while (!(yield page.$("tr.active-selectall"))) {
-            yield page.click("a.selectallperiodes");
-            yield utils_1.sleep(50);
+        try {
+            yield page.waitForSelector("a.selectallperiodes");
+            while (!(yield page.$("tr.active-selectall"))) {
+                yield page.click("a.selectallperiodes");
+                yield utils_1.sleep(50);
+            }
+            return true;
+        }
+        catch (_a) {
+            return false;
         }
     });
 }

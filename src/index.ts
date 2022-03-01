@@ -5,7 +5,7 @@ import { fetchQstSOA } from './consumption/qst';
 import { fetchIncomeSOA } from './income';
 import { fetchSourceDeductionsSOA } from './sourceDeductions';
 import { LanguageType, selectLanguage } from './language';
-import { login } from './login';
+import { closePopup, login } from './login';
 import { navigateToFile } from './navigate';
 
 
@@ -65,6 +65,7 @@ export class RQScraper {
   public newPage = async (url?: string) => {
     const page = await this.browser.newPage();
     await page.goto(url ?? "https://entreprises.revenuquebec.ca/EntPres/SX/SX00/sx00.Portail.PIU/SX00A01/");
+    await closePopup(page)
     return page;
   }
 }

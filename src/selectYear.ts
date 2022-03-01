@@ -18,7 +18,8 @@ export async function selectAndViewYear(page: Page, year: number) {
   console.log(`Scraping year: ${year}`);
   if (!await setYear(page, year))
     return false;
-  await selectAllPeriods(page);
+  if (!await selectAllPeriods(page))
+    return false;
   const watcher = await getWaitableWatcher(page, "#detailsperiodes");
   await page.click("#btnconsulter");
   await watcher.changed;
@@ -26,10 +27,16 @@ export async function selectAndViewYear(page: Page, year: number) {
 }
 
 async function selectAllPeriods(page: Page) {
-  await page.waitForSelector("a.selectallperiodes");
-  while (!await page.$("tr.active-selectall")) {
-    await page.click("a.selectallperiodes");
-    await sleep(50);
+  try {
+    await page.waitForSelector("a.selectallperiodes");
+    while (!await page.$("tr.active-selectall")) {
+      await page.click("a.selectallperiodes");
+      await sleep(50);
+    }
+    return true;
+  }
+  catch {
+     return false;
   }
 }
 
